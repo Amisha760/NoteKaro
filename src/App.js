@@ -5,6 +5,7 @@ import Note from "./Note";
 import './App.css';
 function App() {  
   const[additem,setAdditem]=useState([]);
+  
   const addNote=(note)=>{
     setAdditem((prev)=>{
        return [...prev,note];
@@ -12,6 +13,11 @@ function App() {
     // alert("from app.js")
     // console.log(note);
   };
+  const onDelete=(id)=>{
+     setAdditem((oldData)=>oldData.filter((currdata,index)=>{
+       return index!==id;
+     }))
+  }
   return (
  <>
      <Header/>
@@ -22,6 +28,7 @@ function App() {
          id={index}
          title={val.title}
          content={val.content}
+         deleteItem={onDelete}
          />
          );
     })}
