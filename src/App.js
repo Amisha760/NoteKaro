@@ -1,15 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import Header from "./header";
 import CreateNote from "./CreateNote"
 import Note from "./Note";
 import './App.css';
-function App() {
+function App() {  
+  const[additem,setAdditem]=useState([]);
+  const addNote=(note)=>{
+    setAdditem((prev)=>{
+       return [...prev,note];
+    });
+    // alert("from app.js")
+    // console.log(note);
+  };
   return (
-    <div className="App">
+ <>
      <Header/>
-     <CreateNote/>
-     <Note/>
-    </div>
+     <CreateNote passNote={addNote}/>
+    {additem.map((val,index)=>{
+         return( <Note
+         key={index}
+         id={index}
+         title={val.title}
+         content={val.content}
+         />
+         );
+    })}
+    </>
   );
 }
 
